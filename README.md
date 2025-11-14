@@ -74,6 +74,23 @@ Persist outputs:
 docker run --rm -p 8080:8080 -v $(pwd)/data:/app/data pic2video-morph-service:latest
 ```
 
+## Run with Docker Compose (recommended)
+
+1) Copy and edit env:
+
+```
+cp .env.example .env
+# edit HOST_PORT / limits if needed
+```
+
+2) Up:
+
+```
+docker compose up --build
+```
+
+Access the UI at http://localhost:${HOST_PORT:-8090}. The app listens on `APP_PORT` inside the container (default 8080), and Compose maps it to `HOST_PORT`.
+
 ## Kubernetes (GKE-compatible)
 
 1. Build & push image (example uses Docker Hub; GKE Artifact Registry works as well):
@@ -147,4 +164,3 @@ curl -X POST \
 ## License
 
 MIT
-

@@ -54,5 +54,5 @@ ENV APP_HOST=0.0.0.0 \
     MAX_IMAGE_SIZE_MB=25 \
     ALLOWED_IMAGE_TYPES="image/jpeg,image/png"
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
-
+# Use APP_PORT env var at runtime
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${APP_PORT}"]

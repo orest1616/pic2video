@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  pic2video:
+    build: .
+    image: ${IMAGE_NAME:-pic2video-morph-service}:latest
+    container_name: ${CONTAINER_NAME:-pic2video}
+    env_file:
+      - .env
+    environment:
+      - APP_HOST=${APP_HOST:-0.0.0.0}
+      - APP_PORT=${APP_PORT:-8080}
+      - MORPH_WORK_DIR=/app/data
+      - MAX_UPLOAD_IMAGES=${MAX_UPLOAD_IMAGES:-10}
+      - MAX_IMAGE_SIZE_MB=${MAX_IMAGE_SIZE_MB:-25}
+      - ALLOWED_IMAGE_TYPES=${ALLOWED_IMAGE_TYPES:-image/jpeg,image/png}
+      - DEFAULT_FRAMES_PER_TRANSITION=${DEFAULT_FRAMES_PER_TRANSITION:-30}
+      - DEFAULT_FPS=${DEFAULT_FPS:-30}
+    ports:
+      - "${HOST_PORT:-8090}:${APP_PORT:-8080}"
+    volumes:
+      - ${DATA_DIR:-./data}:/app/data
+    restart: unless-stopped
+
