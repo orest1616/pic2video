@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pic2video-morph-service</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <script defer src="/static/app.js"></script>
+  <link rel="icon" href="data:," />
+  <meta http-equiv="Cache-control" content="no-cache" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+<body>
+  <div class="container">
+    <h1>pic2video-morph-service</h1>
+    <p>Upload 2 or more images and generate a smooth morph video.</p>
+
+    <form id="morph-form">
+      <div class="dropzone" id="dropzone">
+        <p>Drop images here or click to select</p>
+        <input id="file-input" type="file" accept="image/png,image/jpeg" multiple />
+      </div>
+
+      <div class="controls">
+        <label>
+          Frames per transition
+          <input type="number" id="frames" min="1" max="1000" value="30" />
+        </label>
+        <label>
+          FPS
+          <input type="number" id="fps" min="1" max="120" value="30" />
+        </label>
+        <label>
+          Method
+          <select id="method">
+            <option value="classical" selected>classical</option>
+            <option value="rife" disabled>rife (coming soon)</option>
+            <option value="diffusion" disabled>diffusion (coming soon)</option>
+          </select>
+        </label>
+        <button type="submit">Generate</button>
+      </div>
+    </form>
+
+    <div class="status" id="status"></div>
+
+    <div class="result" id="result" hidden>
+      <h2>Result</h2>
+      <video id="video" controls playsinline></video>
+      <a id="download" download="morph.mp4">Download MP4</a>
+    </div>
+  </div>
+</body>
+</html>
+

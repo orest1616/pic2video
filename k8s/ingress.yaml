@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pic2video-morph-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: pic2video.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pic2video-morph-service
+                port:
+                  number: 80
+  # TLS setup example (uncomment and configure your certs)
+  # tls:
+  #   - hosts:
+  #       - pic2video.example.com
+  #     secretName: pic2video-tls
+

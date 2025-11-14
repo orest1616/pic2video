@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pic2video-morph-service
+  labels:
+    app: pic2video-morph-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pic2video-morph-service
+  template:
+    metadata:
+      labels:
+        app: pic2video-morph-service
+    spec:
+      containers:
+        - name: app
+          image: YOUR_REGISTRY/pic2video-morph-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: pic2video-config
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: data
+          emptyDir: {}
+      # To use GPUs, uncomment and ensure GPU node pool & drivers
+      # nodeSelector:
+      #   cloud.google.com/gke-accelerator: nvidia-tesla-t4
+      # tolerations:
+      #   - key: nvidia.com/gpu
+      #     operator: Exists
+      #     effect: NoSchedule
+      # resources:
+      #   limits:
+      #     nvidia.com/gpu: 1
+

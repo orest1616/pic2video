@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pic2video-morph-service"
+version = "0.1.0"
+description = "Generate smooth morphing videos between images via REST API and minimal web UI"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Open Source", email = "opensource@example.com"}]
+dependencies = [
+  "fastapi>=0.111.0",
+  "uvicorn[standard]>=0.30.0",
+  "pydantic>=2.8.0",
+  "python-multipart>=0.0.9",
+  "jinja2>=3.1.4",
+  "opencv-python-headless>=4.10.0.84",
+  "numpy>=1.26.0",
+  "imageio>=2.34.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*", "web*", "k8s*", "docker*"]

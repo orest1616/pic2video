@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pic2video-config
+data:
+  APP_HOST: "0.0.0.0"
+  APP_PORT: "8080"
+  MORPH_WORK_DIR: "/app/data"
+  MAX_UPLOAD_IMAGES: "10"
+  MAX_IMAGE_SIZE_MB: "25"
+  ALLOWED_IMAGE_TYPES: "image/jpeg,image/png"
+  DEFAULT_FRAMES_PER_TRANSITION: "30"
+  DEFAULT_FPS: "30"
+
